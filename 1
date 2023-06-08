@@ -1,0 +1,126 @@
+create table student11(rollno int,s_name varchar(20),s_address varchar(20),constraint t primary key(rollno));
+desc student11;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                    NOT NULL NUMBER(38)
+ S_NAME                                             VARCHAR2(20)
+ S_ADDRESS                                          VARCHAR2(20)
+
+create table marksheet111(rollno int,sub1 int,sub2 int,sub3 int,constraint r1 foreign key(rollno) references student11(rollno));
+desc marksheet111;
+Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ SUB1                                               NUMBER(38)
+ SUB2                                               NUMBER(38)
+ SUB3                                               NUMBER(38)
+
+insert into student11 values(1,'rahul','pattom');
+insert into student11 values(2,'sachinl','ambalamukku');
+insert into student11 values(3,'sourav','nalanchira');
+select * from student111;
+
+    ROLLNO S_NAME               S_ADDRESS
+---------- -------------------- --------------------
+         1 rahul                pattom
+         2 sachinl              ambalamukku
+         3 sourav               nalanchira
+insert into marksheet111 values(1,78,30,45);
+insert into marksheet111 values(2,45,65,50);
+insert into marksheet111 values(3,60,87,33);
+
+select * from marksheet111;
+
+    ROLLNO       SUB1       SUB2       SUB3
+---------- ---------- ---------- ----------
+         1         78         30         45
+         2         45         65         50
+         3         60         87         33
+
+alter table marksheet111 add grade varchar(30);
+
+Table altered.
+
+ select * from marksheet111;
+
+    ROLLNO       SUB1       SUB2       SUB3 GRADE
+---------- ---------- ---------- ---------- ------------------------------
+         1         78         30         45
+         2         45         65         50
+         3         60         87         33
+
+
+SQL> alter table marksheet111 add grade varchar(30);
+
+Table altered.
+
+SQL> select * from marksheet111;
+
+    ROLLNO       SUB1       SUB2       SUB3 GRADE
+---------- ---------- ---------- ---------- ------------------------------
+         1         78         30         45
+         2         45         65         50
+         3         60         87         33
+
+SQL> alter table marksheet111 drop column sub2;
+
+Table altered.
+
+SQL> select * from marksheet111;
+
+    ROLLNO       SUB1       SUB3 GRADE
+---------- ---------- ---------- ------------------------------
+         1         78         45
+         2         45         50
+         3         60         33
+alter table student11 add phone_no int constraint pp check(length(phone_no)=10);
+
+Table altered.
+
+SQL> select * from student11;
+
+    ROLLNO S_NAME               S_ADDRESS              PHONE_NO
+---------- -------------------- -------------------- ----------
+         1 rahul                pattom
+         2 sachinl              ambalamukku
+         3 sourav               nalanchira
+
+SQL> select * from student11 where s_address='pattom';
+
+    ROLLNO S_NAME               S_ADDRESS              PHONE_NO
+---------- -------------------- -------------------- ----------
+         1 rahul                pattom
+select  sub1+sub3  from marksheet111  where rollno=3;
+SQL> select S_name from student11 where rollno=3;
+
+S_NAME
+--------------------
+sourav
+
+
+SQL> update student11 set phone_no=1234567898 where rollno=1;
+
+1 row updated.
+
+SQL> update student11 set phone_no=2345678914 where rollno=2;
+
+1 row updated.
+
+SQL> update student11 set phone_no=3456721345 where rollno=3;
+
+1 row updated.
+
+SQL> select * from student11;
+
+    ROLLNO S_NAME               S_ADDRESS              PHONE_NO
+---------- -------------------- -------------------- ----------
+         1 rahul                pattom               1234567898
+         2 sachinl              ambalamukku          2345678914
+         3 sourav               nalanchira           3456721345
+
+SQL>  select phone_no from student11 where s_name='rahul';
+
+  PHONE_NO
+----------
+1234567898
+
