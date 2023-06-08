@@ -1,0 +1,280 @@
+create table student122(
+    studid int,
+    name varchar(30),
+    class varchar(20),
+   city varchar(30),
+    total_mark int,
+   percentage int,
+   deptid int,
+constraint rr primary key(studid),
+   constraint p2 foreign key(deptid) references depart(deptid));
+
+desc student122;
+
+SQL> desc student122;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDID                                    NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ CLASS                                              VARCHAR2(20)
+ CITY                                               VARCHAR2(30)
+ TOTAL_MARK                                         NUMBER(38)
+ PERCENTAGE                                         NUMBER(38)
+ DEPTID                                             NUMBER(38)
+
+create table depart(deptid int,name varchar(30),constraint r1 primary key(deptid));
+
+SQL> desc depart;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTID                                    NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+
+
+create table company(compid int,name varchar(30),city varchar(30),no_of_employee int,constraint tt primary key(compid));
+
+SQL> desc company;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COMPID                                    NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ CITY                                               VARCHAR2(30)
+ NO_OF_EMPLOYEE                                     NUMBER(38)
+
+
+create table staff(
+staffid int,
+name varchar(30),
+deptid int,
+desig varchar(30),
+salary int,
+city varchar(30),
+constraint ww primary key(staffid),
+constraint dd foreign key(deptid) references depart(deptid));
+SQL> desc staff;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFFID                                   NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ DEPTID                                             NUMBER(38)
+ DESIG                                              VARCHAR2(30)
+ SALARY                                             NUMBER(38)
+ CITY                                               VARCHAR2(30)
+
+
+create  table employee(
+empid int,
+name varchar(30),
+compid int,
+desig varchar(40),
+salary int,
+city varchar(40),
+constraint ty primary key(empid),
+constraint rt foreign key(compid) references company(compid));
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                     NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ COMPID                                             NUMBER(38)
+ DESIG                                              VARCHAR2(40)
+ SALARY                                             NUMBER(38)
+ CITY                                               VARCHAR2(40)
+
+insert into depart values(1001,'mca');
+insert into depart values(1002,'mba');
+insert into depart values(1003,'mtech');
+
+1 row created.
+
+SQL> select * from depart;
+
+    DEPTID NAME
+---------- ------------------------------
+      1001 mca
+      1002 mba
+      1003 mtech
+insert into company values(2001,'hr','tvm',6);
+insert into company values(2002,'tata','kochi',8);
+insert into company values(2003,'itsolutions','alappuzha',3);
+
+ select * from company;
+
+    COMPID NAME                           CITY
+---------- ------------------------------ ------------------------------
+NO_OF_EMPLOYEE
+--------------
+      2001 hr                             tvm
+             6
+
+      2002 tata                           kochi
+             8
+
+      2003 itsolutions                    alappuzha
+             3
+insert into employee values(3001,'raman',2001,'clerk',10000,'aluva');
+insert into employee values(3002,'abhiram',2002,'ass-prof',15000,'tvm');
+insert into employee values(3003,'shilpa',2003,'salesgirl',25000,'kochi');
+SQL> select * from employee;
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIG                                        SALARY
+---------------------------------------- ----------
+CITY
+----------------------------------------
+      3001 raman                                2001
+clerk                                         10000
+aluva
+
+      3002 abhiram                              2002
+ass-prof                                      15000
+tvm
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIG                                        SALARY
+---------------------------------------- ----------
+CITY
+----------------------------------------
+
+      3003 shilpa                               2003
+salesgirl                                     25000
+kochi
+
+insert into student122 values(1,'akshay','mca','tvm',300,85,1001);
+insert into student122 values(2,'arunima','mba','kollam',270,90,1002);
+insert into student122 values(3,'krish','mca','tvm',200,70,1001);
+insert into student122 values(4,'nevil','mba','aluva',150,87,1002);
+
+SQL> select * from student122;
+
+    STUDID NAME                           CLASS
+---------- ------------------------------ --------------------
+CITY                           TOTAL_MARK PERCENTAGE     DEPTID
+------------------------------ ---------- ---------- ----------
+         1 akshay                         mca
+tvm                                   300         85       1001
+
+         2 arunima                        mba
+kollam                                270         90       1002
+
+         3 krish                          mca
+tvm                                   200         70       1001
+
+
+    STUDID NAME                           CLASS
+---------- ------------------------------ --------------------
+CITY                           TOTAL_MARK PERCENTAGE     DEPTID
+------------------------------ ---------- ---------- ----------
+         4 nevil                          mba
+aluva                                 150         87       1002
+ insert into staff values(3001,'deepa',1001,'ass_prof',32000,'tvm');
+insert into staff values(6001,'samuel',1001,'ass_prof',31000,'kollam');
+insert into staff values(6002,'aleena',1002,'prof',38000,'aluva');
+
+SQL> select * from staff;
+
+   STAFFID NAME                               DEPTID
+---------- ------------------------------ ----------
+DESIG                              SALARY CITY
+------------------------------ ---------- ------------------------------
+      3001 deepa                                1001
+ass_prof                            32000 tvm
+
+      6001 samuel                               1001
+ass_prof                            31000 kollam
+
+      6002 aleena                               1002
+prof                                38000 aluva
+
+SQL> select * from student122 order by deptid;
+
+    STUDID NAME                           CLASS
+---------- ------------------------------ --------------------
+CITY                           TOTAL_MARK PERCENTAGE     DEPTID
+------------------------------ ---------- ---------- ----------
+         3 krish                          mca
+tvm                                   200         70       1001
+
+         1 akshay                         mca
+tvm                                   300         85       1001
+
+         4 nevil                          mba
+aluva                                 150         87       1002
+
+
+    STUDID NAME                           CLASS
+---------- ------------------------------ --------------------
+CITY                           TOTAL_MARK PERCENTAGE     DEPTID
+------------------------------ ---------- ---------- ----------
+         2 arunima                        mba
+kollam                                270         90       1002
+
+SQL> select * from employee;
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIG                                        SALARY
+---------------------------------------- ----------
+CITY
+----------------------------------------
+      3001 raman                                2001
+clerk                                         10000
+aluva
+
+      3002 abhiram                              2002
+ass-prof                                      15000
+tvm
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIG                                        SALARY
+---------------------------------------- ----------
+CITY
+----------------------------------------
+
+      3003 shilpa                               2003
+salesgirl
+
+
+SQL> select * from staff where salary>20000;
+
+   STAFFID NAME                               DEPTID
+---------- ------------------------------ ----------
+DESIG                              SALARY CITY
+------------------------------ ---------- ------------------------------
+      3001 deepa                                1001
+ass_prof                            32000 tvm
+
+      6001 samuel                               1001
+ass_prof                            31000 kollam
+
+      6002 aleena                               1002
+prof                                38000 aluva
+
+SQL> select * from student122 where percentage>80 and percentage<90;
+
+    STUDID NAME                           CLASS
+---------- ------------------------------ --------------------
+CITY                           TOTAL_MARK PERCENTAGE     DEPTID
+------------------------------ ---------- ---------- ----------
+         1 akshay                         mca
+tvm                                   300         85       1001
+
+         4 nevil                          mba
+aluva                                 150         87       1002
+
+
+
+
+
+
+
+
+
+
+
+
+
+
