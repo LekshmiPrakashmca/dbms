@@ -1,0 +1,29 @@
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+08-JUN-23
+
+SQL> select to_char(sysdate,'mm-dd-yyyy')from dual;
+
+TO_CHAR(SY
+----------
+06-08-2023
+
+SQL> select to_char(sysdate,'HH24:MI:SS')from dual;
+
+TO_CHAR(
+--------
+21:19:57
+
+SQL> select to_char(sysdate-1,'day-month ddth yyyy')"yesterday" from dual;
+
+yesterday
+--------------------------------------------------------------------------------
+wednesday-june      07th 2023
+
+SQL>  select abs(to_date('31-08-2023','dd-mm-yyyy')-to_date('01=06-2023','dd-mm-yyyy'))"different"from dual;
+
+ different
+----------
+        91
